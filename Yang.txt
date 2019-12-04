@@ -1,0 +1,44 @@
+杨氏矩阵
+#include<stdio.h>
+#include<windows.h>
+#define true 1
+#define false 0
+#define N 4
+typedef int bool;
+bool  Yangcheck(int a[][N], int M, int target, int *i, int *j)
+{
+	if (target<a[0][0] || target>a[M - 1][N - 1])
+		return false;	
+	int row = 0;	
+	int col = N - 1;	
+	while (row < M&&col >= 0)
+	{
+		if (target == a[row][col])
+	{ 
+			*i = row;		
+	        *j = col;		
+	    return true;
+	}
+		else if (target > a[row][col])
+	{ 
+			row++;
+	}
+		else if (target < a[row][col])
+	{ 
+			col--;
+	}
+	}
+	return false;
+}
+int main(void)
+{ 
+	  int a[4][4] = { { 1,2,3,4 }, { 5,6,7,8 }, { 9,10,11,12 }, { 13,14,15,16 } };
+      int i = -1;	
+      int j = -1;	
+      int target = 14;
+      bool b = Yangcheck(a, 4, target, &i, &j);
+      if (b){ 
+	printf("查找到:%d，位置为:%d,%d\n", target, i, j);
+}
+system("pause");
+}
