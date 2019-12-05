@@ -1,0 +1,49 @@
+
+#include <stdio.h>
+#include <string.h>
+#include<windows.h>
+
+int my_strlen(const char *arr)
+{	
+	const char *ret = arr;
+    while ((*ret++)!='\0');
+    return ret-arr-1 ;
+}
+void *reverse(char *p, char *q)
+{
+	char tem;
+	while (p <= q)
+	{
+		tem = *p;
+		*p++ = *q;
+		*q-- = tem;
+	}
+}
+char *reverse_(const char*p)
+{
+	int size = my_strlen(p);	
+    const char *q = p +size -1;	
+    const char *t = p;	
+    reverse(p,q);
+    q=t;
+    while(q<=t+size)	
+{	
+	if((*q==' ')||(*q=='\0'))	
+	{		
+		--q;	
+		reverse(p,q);	
+		q+=2;		
+		p=q;	
+	}		
+	else	
+		q++;	
+}	
+return t;
+}
+int main()
+{	
+	char arr[] = "student a am i";
+	printf("%s\n",reverse_(arr));
+	system("pause");
+	return 0;
+}
