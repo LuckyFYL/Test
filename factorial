@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<string.h>
+#include<windows.h>
+int Factorial(int n)
+        {
+	
+		if (n == 1)
+		{
+			return 1;
+		}
+		return n * Factorial(n - 1);
+	}
+
+int  factorial(int n) //非递归
+	{
+		int sum = 1;
+		for (; n > 0; n--)
+		{
+			sum *= n;
+		}
+		return sum;
+	}
+	int main()
+	{
+		int n = 5;
+		printf("请输入n:");
+		scanf_s("%d", &n);
+		printf("递归结果：%d\n", Factorial(n));
+	        printf("循环结果：%d\n", factorial(n));
