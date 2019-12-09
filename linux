@@ -1,0 +1,244 @@
+1. 双击=cd + ls
+2. 
+[whb@VM_0_12_centos ~]$ ls
+68_class  81_class  code
+[whb@VM_0_12_centos ~]$ cd 68_class/
+[whb@VM_0_12_centos 68_class]$ pwd
+/home/whb/68_class 
+/:路径分隔符，windows：\
+3.
+[whb@VM_0_12_centos 1_lesson]$ pwd
+/home/whb/68_class/1_lesson
+[whb@VM_0_12_centos 1_lesson]$ touch test.c
+[whb@VM_0_12_centos 1_lesson]$ ls
+test.c
+4. Linux下 ： 一切皆文件
+[whb@VM_0_12_centos 1_lesson]$ echo "hello world"
+hello world
+[whb@VM_0_12_centos 1_lesson]$ echo "hello world" > test.c
+[whb@VM_0_12_centos 1_lesson]$ cat test.c
+hello world
+
+5. d开头，目录，-开头，普通文件
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 8
+drwxrwxr-x 2 whb whb 4096 Dec  7 11:51 dir
+-rw-rw-r-- 1 whb whb   12 Dec  7 11:47 test.c
+
+6. “.”:当前目录“..”:上级目录
+[whb@VM_0_12_centos 1_lesson]$ ls -al
+total 16
+drwxrwxr-x 3 whb whb 4096 Dec  7 11:51 .
+drwxrwxr-x 3 whb whb 4096 Dec  7 11:15 ..
+drwxrwxr-x 2 whb whb 4096 Dec  7 11:51 dir
+-rw-rw-r-- 1 whb whb   12 Dec  7 11:47 test.c
+
+ 7. “/”: 根目录
+[whb@VM_0_12_centos home]$ pwd
+/home
+[whb@VM_0_12_centos home]$ cd ..
+[whb@VM_0_12_centos /]$ pwd
+/
+[whb@VM_0_12_centos /]$ cd ..
+[whb@VM_0_12_centos /]$ pwd
+/
+
+8. 
+[whb@VM_0_12_centos dir]$ ls /home/whb/68_class/1_lesson/test.c
+/home/whb/68_class/1_lesson/test.c -> 绝对路径，以“/”开始
+[whb@VM_0_12_centos dir]$ ls ../test.c
+../test.c ->相对路径
+[whb@VM_0_12_centos dir]$ pwd
+/home/whb/68_class/1_lesson/dir
+
+9.
+[whb@VM_0_12_centos 1_lesson]$ touch .file
+[whb@VM_0_12_centos 1_lesson]$ ls
+dir  test.c
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 8
+drwxrwxr-x 2 whb whb 4096 Dec  7 11:51 dir
+-rw-rw-r-- 1 whb whb   12 Dec  7 11:47 test.c
+[whb@VM_0_12_centos 1_lesson]$ ls -al #查看隐藏文件
+total 16
+drwxrwxr-x 3 whb whb 4096 Dec  7 12:06 .
+drwxrwxr-x 3 whb whb 4096 Dec  7 11:15 ..
+drwxrwxr-x 2 whb whb 4096 Dec  7 11:51 dir
+-rw-rw-r-- 1 whb whb    0 Dec  7 12:06 .file
+-rw-rw-r-- 1 whb whb   12 Dec  7 11:47 test.c
+
+ls(-a/-l)/cd(./..)/pwd/clear/touch/mkdir/cat/echo/>/
+
+10.
+[whb@VM_0_12_centos 1_lesson]$ rm test.c
+[whb@VM_0_12_centos 1_lesson]$ ls
+dir
+[whb@VM_0_12_centos 1_lesson]$ clear
+[whb@VM_0_12_centos 1_lesson]$ ls
+dir
+[whb@VM_0_12_centos 1_lesson]$ ll
+total 4
+drwxrwxr-x 2 whb whb 4096 Dec  7 11:51 dir
+[whb@VM_0_12_centos 1_lesson]$ rm dir
+rm: cannot remove ‘dir’: Is a directory
+[whb@VM_0_12_centos 1_lesson]$ rm -r dir
+
+11. sudo : 权限提升
+[whb@VM_0_12_centos 1_lesson]$ whoami
+whb
+[whb@VM_0_12_centos 1_lesson]$ sudo whoami
+[sudo] password for whb: 
+root
+[whb@VM_0_12_centos 1_lesson]$ sudo whoami
+root
+
+12.
+[whb@VM_0_12_centos 1_lesson]$ touch me
+[whb@VM_0_12_centos 1_lesson]$ ls
+me  test.c
+[whb@VM_0_12_centos 1_lesson]$ ls
+me  test.c
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 0
+-rw-rw-r-- 1 whb whb 0 Dec  7 12:17 me
+-rw-rw-r-- 1 whb whb 0 Dec  7 12:09 test.c
+[whb@VM_0_12_centos 1_lesson]$ sudo touch file
+[sudo] password for whb: 
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 0
+-rw-r--r-- 1 root root 0 Dec  7 12:18 file
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:17 me
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:09 test.c
+[whb@VM_0_12_centos 1_lesson]$ sudo touch file1
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 0
+-rw-r--r-- 1 root root 0 Dec  7 12:18 file
+-rw-r--r-- 1 root root 0 Dec  7 12:18 file1
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:17 me
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:09 test.c
+[whb@VM_0_12_centos 1_lesson]$ rm file
+rm: remove write-protected regular empty file ‘file’? y
+[whb@VM_0_12_centos 1_lesson]$ ls
+file1  me  test.c
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 0
+-rw-r--r-- 1 root root 0 Dec  7 12:18 file1
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:17 me
+-rw-rw-r-- 1 whb  whb  0 Dec  7 12:09 test.c
+[whb@VM_0_12_centos 1_lesson]$ rm -f file1
+[whb@VM_0_12_centos 1_lesson]$ ls -l
+total 0
+-rw-rw-r-- 1 whb whb 0 Dec  7 12:17 me
+-rw-rw-r-- 1 whb whb 0 Dec  7 12:09 test.c
+
+ls(-a/-l)/cd(./..)/pwd/clear/touch/mkdir/cat/echo/>/sudo/rm(-r/f)/whoami/bc/cal/top/du -h/free/lscpu
+
+13.
+[whb@VM_0_12_centos 1_lesson]$ su
+Password: 
+[root@VM_0_12_centos 1_lesson]# whoami
+root
+[root@VM_0_12_centos 1_lesson]# exit
+exit
+[whb@VM_0_12_centos 1_lesson]$ whoami
+whb
+
+14.
+[whb@VM_0_12_centos 1_lesson]$ touch test.c
+[whb@VM_0_12_centos 1_lesson]$ ls
+test.c
+[whb@VM_0_12_centos 1_lesson]$ vim test.c
+a. 输入i， 进入插入模式
+b. 正常编写代码	
+c. esc->shift+:->wq
+
+15.
+[whb@VM_0_12_centos 1_lesson]$ cat test.c
+#include <stdio.h>
+
+int main()
+{
+    printf("hello bit!\n");
+    return 0;
+}
+[whb@VM_0_12_centos 1_lesson]$ gcc test.c
+[whb@VM_0_12_centos 1_lesson]$ ls
+a.out  test.c
+[whb@VM_0_12_centos 1_lesson]$ ./a.out 
+hello bit!
+
+16.vim简单配置
+[whb@VM_0_12_centos 2_lesson]$ whoami
+whb
+[whb@VM_0_12_centos 2_lesson]$ cd  ~
+[whb@VM_0_12_centos ~]$ pwd
+/home/whb
+[whb@VM_0_12_centos ~]$ ls -al
+total 76
+drwx------  8 whb  whb   4096 Dec  7 16:40 .
+drwxr-xr-x. 3 root root  4096 Nov 30 09:55 ..
+drwxrwxr-x  4 whb  whb   4096 Dec  7 16:35 68_class
+drwxrwxr-x  3 whb  whb   4096 Dec  6 21:00 81_class
+-rw-------  1 whb  whb  17787 Dec  7 16:40 .bash_history
+-rw-r--r--  1 whb  whb     18 Apr 11  2018 .bash_logout
+-rw-r--r--  1 whb  whb    193 Apr 11  2018 .bash_profile
+-rw-r--r--  1 whb  whb    231 Apr 11  2018 .bashrc
+drwxrwxr-x  3 whb  whb   4096 Nov 30 09:57 .cache
+drwxrwxr-x  3 whb  whb   4096 Dec  1 15:44 code
+drwxrwxr-x  3 whb  whb   4096 Nov 30 09:57 .config
+drwxrw----  3 whb  whb   4096 Nov 30 14:48 .pki
+-rw-------  1 whb  whb   5596 Dec  7 16:40 .viminfo
+[whb@VM_0_12_centos ~]$ touch .vimrc
+[whb@VM_0_12_centos ~]$ ls -al
+total 76
+drwx------  8 whb  whb   4096 Dec  7 16:41 .
+drwxr-xr-x. 3 root root  4096 Nov 30 09:55 ..
+drwxrwxr-x  4 whb  whb   4096 Dec  7 16:35 68_class
+drwxrwxr-x  3 whb  whb   4096 Dec  6 21:00 81_class
+-rw-------  1 whb  whb  17831 Dec  7 16:41 .bash_history
+-rw-r--r--  1 whb  whb     18 Apr 11  2018 .bash_logout
+-rw-r--r--  1 whb  whb    193 Apr 11  2018 .bash_profile
+-rw-r--r--  1 whb  whb    231 Apr 11  2018 .bashrc
+drwxrwxr-x  3 whb  whb   4096 Nov 30 09:57 .cache
+drwxrwxr-x  3 whb  whb   4096 Dec  1 15:44 code
+drwxrwxr-x  3 whb  whb   4096 Nov 30 09:57 .config
+drwxrw----  3 whb  whb   4096 Nov 30 14:48 .pki
+-rw-------  1 whb  whb   5596 Dec  7 16:40 .viminfo
+-rw-rw-r--  1 whb  whb      0 Dec  7 16:41 .vimrc
+[whb@VM_0_12_centos ~]$ vim .vimrc # set nu
+[whb@VM_0_12_centos 2_lesson]$ vim ~/.vimrc 
+
+
+set nu
+syntax on
+set showmode
+"set mouse=a
+set encoding=utf-8
+filetype indent on
+set autoindent
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+
+set relativenumber
+set cursorline
+set  ruler
+set showmatch
+set noerrorbells
+set visualbell
+
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+
+17. gcc使用
+[whb@VM_0_12_centos 2_lesson]$ ls
+a.out  test.c
+[whb@VM_0_12_centos 2_lesson]$ gcc -o mytest test.c
+[whb@VM_0_12_centos 2_lesson]$ ls
+a.out  mytest  test.c
+[whb@VM_0_12_centos 2_lesson]$ ./mytest 
+hello world!
+10
