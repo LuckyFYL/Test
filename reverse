@@ -1,0 +1,48 @@
+
+#include <stdio.h>
+#include<windows.h>
+int mystrlen(char*b){
+	char*b1 = b;
+	while ((*b1++) != '\0');
+	return b1 - b - 1;
+}
+char reverse_left( int a, int str,char *p){
+	
+	int i;
+	for (i = 0; i < a; i++)
+	{
+		int j = 0;
+		char tmp = p[0];
+		for (j = 0; j < str; j++)
+		{
+			p[j] = p[j + 1];
+		}
+		p[str - 1] = tmp;
+	}
+	return 0;
+}
+int main(){
+	int a = 0;
+	char b[] = "Microsoft";
+	int str = mystrlen(b);
+	printf("你向左旋几个字符:");
+	scanf_s("%d", &a);
+	while (a < 1 || a > str - 1)//对于输入旋转字符数的临界值判断，是否超过字符串长度
+	{
+		if (a == str)//旋转字符数为字符串长度时，旋转后的字符串与旋转前的字符串一致，所以可直接输出
+		{
+			printf("%s", str);
+			system("pause");
+			return 0;
+		}
+		else
+		{
+			printf("输入错误\n");
+			scanf_s("%d", &a);
+		}
+	}
+	reverse_left(a,str,b);
+	printf("%s", b);
+	system("pause");
+	return 0;
+}
