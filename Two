@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+#include <assert.h>
+#include <windows.h>
+
+int FindTowData(int a[], int num, int *xp, int *yp)
+{
+	assert(a);
+	assert(num >= 2);
+	assert(xp);
+	assert(yp);
+	*xp = 0;
+	*yp = 0;
+
+	//A
+	int result = a[0];
+	int i = 1;
+	for (; i < num; i++){
+		result ^= a[i];
+	}
+	if (result == 0){
+		return 1;
+	}
+
+	//B
+	i = 0;
+	int flag = 1;//0000 0001
+	while (i < 8 * sizeof(int)){
+		//不建议：flag<<=i;
+		if (result & (flag << i)){ // flag<<i 
+			break;
+		}
+		i++;
+	}
+	//C
+	flag <<= i; //一个坑！！
+	//flag 就标识了不相同的那个比特位！
+	for (i = 0; i < num; i++){
+		if (a[i] & flag){ //A
+			*xp ^= a[i];
+		}
+		else{ //B
+			*yp ^= a[i];
+		}
+	}
+	return 0;
+}
+int main(){
+
+
+	int a[] = { 1, 2, 2, 1, 13, 45 };
+	int num = sizeof(a) / sizeof(a[0]);
+	int x, y;
+	if (FindTowData(a, num, &x, &y) == 0){ //success
+		printf("find success : %d, %d\n", x, y);
+	}
+	system("pause");
+	return 0;
+}
