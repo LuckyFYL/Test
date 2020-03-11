@@ -1,0 +1,19 @@
+char *my_strstr(char*str, const char *dst){
+	assert(str&&dst);
+	const char*start = str;
+		const char*start_p = NULL;
+		const char*q = NULL;
+	while (*start){
+		q = dst;
+		start_p= start;
+		while (*start_p&&*q&&*q== *start_p){
+			start_p++;
+			q++;
+		}
+		if (*q == '\0'){
+			return start;
+		}
+		start++;
+	}
+	return NULL;
+}
