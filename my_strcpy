@@ -1,0 +1,7 @@
+
+
+char *my_strcpy(char* str, const char*dst){
+	while (*str++ = *dst++);
+	return str;
+}
+
